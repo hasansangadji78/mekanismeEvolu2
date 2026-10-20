@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>Lab Maya Mekanisme Evolusi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+*{box-sizing:border-box;margin:0;font-family:"Trebuchet MS",Verdana,sans-serif}
+html,body{height:100%;overflow:hidden;background:linear-gradient(135deg,#ffd86b,#ff7eb3 45%,#6ec1ff 100%)}
+#st{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;background:linear-gradient(160deg,#fffbe6,#e6f7ff 55%,#ffe6f2);overflow:hidden;color:#2a2350}
+.bub{position:absolute;border-radius:50%;opacity:.35;animation:fl 8s ease-in-out infinite;pointer-events:none}
+@keyframes fl{50%{transform:translateY(-30px) scale(1.1)}}
+header{position:absolute;top:0;left:0;right:0;height:84px;padding:10px 24px;display:flex;align-items:center;gap:14px;background:linear-gradient(90deg,#7b2ff7,#f107a3 60%,#ff9a3c);color:#fff;box-shadow:0 8px 0 #4b1a9c,0 14px 22px #0004}
+h1{font-size:25px;text-shadow:0 3px 0 #0005;line-height:1.1}h1 small{display:block;font-size:12px;font-weight:400}
+nav{margin-left:auto;display:flex;gap:7px}
+button{cursor:pointer;border:0;border-radius:14px;padding:9px 15px;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(#35c4ff,#1a7fe0);box-shadow:0 5px 0 #0e55a0,0 8px 12px #0003;transition:.1s}
+button:hover{filter:brightness(1.1)}button:active{transform:translateY(4px);box-shadow:0 1px 0 #0e55a0}
+nav button{background:linear-gradient(#ffffff40,#ffffff18);box-shadow:0 4px 0 #0003}nav button.on{background:linear-gradient(#ffe45c,#ffb300);color:#4b1a9c;box-shadow:0 4px 0 #b36b00}
+.g{background:linear-gradient(#5be36b,#1fa83a);box-shadow:0 5px 0 #11702a}.r{background:linear-gradient(#ff7a7a,#e02e4c);box-shadow:0 5px 0 #961b32}.o{background:linear-gradient(#ffc04d,#ff7a1a);box-shadow:0 5px 0 #b34d00}
+.pn{display:none;position:absolute;top:104px;left:24px;right:24px;bottom:18px}.pn.on{display:block;animation:pop .35s}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.cd{background:#fff;border-radius:22px;padding:16px 20px;box-shadow:0 8px 0 #c9b8ff,0 14px 24px #4b1a9c33;border:3px solid #fff}
+.cd h2{color:#7b2ff7;font-size:21px;margin-bottom:6px}.cd p,.cd li{font-size:14.5px;line-height:1.5}
+.row{display:flex;gap:18px;height:100%}
+#tl{width:290px;display:flex;flex-direction:column;gap:12px}#tl button{text-align:left;padding:15px;font-size:15px}
+#tc{flex:1}#tc p{margin:7px 0}.tag{display:inline-block;background:#ffe45c;color:#6a3d00;border-radius:10px;padding:2px 9px;font-weight:700;font-size:13px}
+#pg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;height:100%}#pg .cd{padding:12px 16px}#pg li{font-size:12.6px;line-height:1.38;margin-left:16px}
+.num{display:inline-block;width:30px;height:30px;border-radius:50%;background:#ff4fa3;color:#fff;text-align:center;line-height:30px;margin-right:6px}
+canvas{background:#f4fbff;border-radius:14px;display:block;width:100%}
+.sl{margin:5px 0;font-size:13.5px;font-weight:700}.sl input{width:100%;accent-color:#f107a3}.sl b{color:#7b2ff7}
+.ro{display:flex;gap:8px;margin-top:8px}.ro div{flex:1;text-align:center;border-radius:14px;padding:6px;color:#fff;font-weight:700;font-size:12px}.ro span{font-size:22px;display:block}
+.bt{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.bt button{padding:7px 11px;font-size:13px}
+.op{display:block;width:100%;text-align:left;margin:8px 0;background:#f2ecff;color:#2a2350;box-shadow:0 4px 0 #c9b8ff;font-weight:600}.op.ok{background:#b9f5c4;box-shadow:0 4px 0 #2fa84a}.op.no{background:#ffc9d1;box-shadow:0 4px 0 #e02e4c}
+.fb{margin-top:8px;padding:10px 14px;border-radius:14px;background:#fff7d6;font-size:14px;line-height:1.45}
+#sc{font-size:56px;font-weight:900;color:#f107a3}#bd{font-size:70px}
+#fl{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:12.3px;line-height:1.35;margin-top:8px}
+#fl div{background:#f6f0ff;border-radius:10px;padding:6px 9px}
+#ph{width:230px;height:230px;border-radius:50%;border:8px solid #ff4fa3;box-shadow:0 0 0 6px #ffe45c,0 10px 20px #0003;background:#f2ecff center/cover;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:#7b2ff7;margin:10px auto}
+input[type=text]{border:3px solid #c9b8ff;border-radius:12px;padding:7px 11px;font-size:14px;width:260px}
+@media print{html,body{overflow:visible;background:#fff;height:auto}#st{position:static;transform:none!important;width:auto;height:auto;background:#fff}header,.pn:not(#nilai),.bub,.noprint{display:none!important}#nilai{display:block!important;position:static}.cd{box-shadow:none;border:2px solid #7b2ff7}}
+</style></head><body>
+<div id="st">
+<div class="bub" style="width:140px;height:140px;background:#ff9ad5;left:-30px;top:560px"></div>
+<div class="bub" style="width:100px;height:100px;background:#8fd8ff;right:40px;top:620px;animation-delay:2s"></div>
+<header><div style="font-size:42px">🧬</div><h1>Lab Maya Mekanisme Evolusi<small>Biologi Fase E · Kelas XII SMA</small></h1>
+<nav id="nv"></nav><button id="snd" class="o" title="Suara">🔊</button></header>
+
+<section class="pn on" id="teori"><div class="row"><div id="tl"></div><div class="cd" id="tc"></div></div></section>
+
+<section class="pn" id="prosedur"><div id="pg"></div></section>
+
+<section class="pn" id="simulasi"><div class="row">
+<div style="width:700px;display:flex;flex-direction:column;gap:12px">
+<div class="cd" style="padding:10px"><canvas id="c1" width="680" height="240" style="height:240px"></canvas><div style="font-size:12px;margin-top:4px">Setiap bulatan = 1 individu: <b style="color:#ff4fa3">● AA</b> <b style="color:#9b4dff">● Aa</b> <b style="color:#12b5d6">● aa</b></div></div>
+<div class="cd" style="padding:10px"><canvas id="c2" width="680" height="230" style="height:230px"></canvas></div></div>
+<div class="cd" style="flex:1;padding:12px 16px">
+<h2 style="font-size:18px">🎛️ Panel Kontrol Populasi</h2>
+<div class="sl">Ukuran populasi (N): <b id="vN"></b><input type="range" id="N" min="10" max="200" step="10" value="100"></div>
+<div class="sl">Frekuensi awal alel A (p): <b id="vp"></b><input type="range" id="p0" min="0" max="1" step="0.05" value="0.5"></div>
+<div class="sl">Mutasi A→a (µ): <b id="vmu"></b><input type="range" id="mu" min="0" max="0.1" step="0.005" value="0"></div>
+<div class="sl">Migrasi (m, alel A migran = 0,2): <b id="vm"></b><input type="range" id="m" min="0" max="0.3" step="0.01" value="0"></div>
+<div class="sl">Tekanan seleksi vs aa (s): <b id="vs"></b><input type="range" id="s" min="0" max="1" step="0.05" value="0"></div>
+<div class="ro"><div style="background:#ff4fa3">Generasi<span id="rg">0</span></div><div style="background:#7b2ff7">p (A)<span id="rp">0.50</span></div><div style="background:#12b5d6">q (a)<span id="rq">0.50</span></div></div>
+<div class="bt"><button class="g" id="b1">▶ 1 Generasi</button><button class="o" id="ba">⏩ Auto</button><button class="r" id="br">⟲ Reset</button></div>
+<div style="font-size:12.5px;font-weight:700;margin-top:8px">Studi kasus cepat:</div>
+<div class="bt" style="margin-top:4px"><button data-k="mut">🧪 Mutasi</button><button data-k="mig">🦜 Migrasi</button><button data-k="dri">🏝️ Hanyutan</button><button data-k="sel">🌿 Seleksi</button></div>
+<p id="kn" style="font-size:12.5px;margin-top:6px;line-height:1.4;color:#6a3d00"></p></div></div></section>
+
+<section class="pn" id="lkpd"><div class="cd" style="height:100%;position:relative">
+<h2>📝 LKPD HOTS — <span id="qn"></span></h2><p id="qq" style="font-weight:700;font-size:16px;margin:8px 0"></p><div id="qo"></div><div id="qf"></div>
+<div style="position:absolute;bottom:14px;left:20px;right:20px;display:flex;gap:10px"><button id="qp">◀ Sebelumnya</button><button id="qx" class="g">Berikutnya ▶</button><button id="qs" class="o" style="margin-left:auto">🏆 Lihat Nilai</button></div></div></section>
+
+<section class="pn" id="nilai"><div class="row"><div class="cd" style="width:380px;text-align:center"><h2>🏅 Hasil Belajar</h2>
+<p class="noprint" style="margin:6px 0">Nama siswa:</p><input type="text" id="nm" placeholder="Tulis namamu"><p id="pnm" style="font-weight:700"></p>
+<div id="bd">🥚</div><div id="bn" style="font-weight:800;font-size:19px;color:#7b2ff7"></div><div id="sc">0</div><div style="font-size:13px">skor (maks. 100: 5 pilihan ganda × 12 + 2 uraian × 20)</div>
+<div class="bt noprint" style="justify-content:center;margin-top:12px"><button class="g" id="dl">⬇ Unduh PDF</button><button class="r" id="rs">⟲ Reset LKPD</button></div>
+<p style="font-size:11.5px;margin-top:10px">Lab Maya Evolusi · Hasan Sangadji, S.Pd<br>SMA Mathla’ul Anwar Masohi, Kab. Maluku Tengah</p></div>
+<div class="cd" style="flex:1"><h2>💬 Umpan Balik Jawabanmu</h2><div id="fl"></div></div></div></section>
+
+<section class="pn" id="dev"><div class="row"><div class="cd" style="width:420px;text-align:center"><h2>👨‍🏫 Pengembang</h2><div id="ph">Klik tombol di bawah untuk mengunggah foto</div>
+<label><button onclick="this.nextElementSibling.click()">📷 Unggah Foto</button><input type="file" accept="image/*" id="pf" hidden></label></div>
+<div class="cd" style="flex:1"><h2>Hasan Sangadji, S.Pd</h2><p><span class="tag">Guru Biologi</span></p><p style="margin-top:10px">SMA Mathla’ul Anwar Masohi<br>Kabupaten Maluku Tengah, Maluku</p>
+<p style="margin-top:14px"><b>Tentang media ini:</b> Lab maya interaktif untuk membantu peserta didik Fase E (Kelas XII) memahami mekanisme evolusi selain seleksi alam: mutasi, migrasi, hanyutan genetik, dan rekombinasi gen, melalui simulasi perubahan frekuensi alel.</p>
+<p style="margin-top:14px"><b>Capaian pembelajaran:</b></p><ol style="margin-left:22px"><li>Mengidentifikasi mekanisme evolusi melalui studi kasus.</li><li>Menjelaskan perubahan frekuensi alel dengan simulasi sederhana.</li><li>Memprediksi arah perubahan genetik saat lingkungan atau tekanan seleksi berubah.</li></ol></div></div></section>
+</div>
+<script>
+const $=i=>document.getElementById(i),T=["teori","prosedur","simulasi","lkpd","nilai","dev"],TN=["📖 Teori","🧭 Prosedur","🔬 Simulasi","📝 LKPD","🏅 Nilai","👨‍🏫 Pengembang"];
+function fit(){const s=Math.min(innerWidth/1280,innerHeight/720);$("st").style.transform=`translate(${(innerWidth-1280*s)/2}px,${(innerHeight-720*s)/2}px) scale(${s})`}
+addEventListener("resize",fit);fit();
+/* suara */
+let ac,on=true,bgT;
+function au(){if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();if(ac.state=="suspended")ac.resume()}
+function tone(f,d,v,t="sine"){if(!ac||!on)return;const o=ac.createOscillator(),g=ac.createGain();o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,ac.currentTime);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}
+const sc5=[523,587,659,784,880,784,659,587];let ni=0;
+function bg(){clearInterval(bgT);bgT=setInterval(()=>{tone(sc5[ni++%8]/2,.9,.025,"triangle");if(ni%4==0)tone(130,1.4,.02)},650)}
+$("snd").onclick=()=>{au();on=!on;$("snd").textContent=on?"🔊":"🔇";on?bg():clearInterval(bgT)};
+document.addEventListener("click",e=>{au();if(!bgT&&on)bg();if(e.target.closest("button"))tone(880,.12,.08,"square")});
+/* tab */
+function go(i){T.forEach((t,j)=>{$(t).classList.toggle("on",i==j);$("nv").children[j].classList.toggle("on",i==j)});if(i==4)nilai()}
+TN.forEach((n,i)=>{const b=document.createElement("button");b.textContent=n;b.onclick=()=>go(i);$("nv").append(b)});go(0);
+/* teori */
+const TH=[
+["🧪 Mutasi","Perubahan materi genetik (DNA) yang terjadi secara acak dan menjadi <b>satu-satunya sumber alel baru</b>.","Mengubah alel menjadi alel lain; laju per generasi sangat kecil (≈10⁻⁵–10⁻⁶), jadi efek cepatnya lemah, tetapi bahan mentah evolusi.","Albinisme pada hewan akibat mutasi gen pigmen; resistensi bakteri terhadap antibiotik."],
+["🦜 Migrasi (Aliran Gen)","Perpindahan individu atau gamet antarpopulasi yang membawa alel ke populasi lain.","Menambah/mengurangi alel dan <b>menyamakan</b> frekuensi alel antarpopulasi. Rumus: p’ = (1−m)p + m·pₘ.","Burung nuri atau serbuk sari yang terbawa angin antar pulau di Maluku."],
+["🏝️ Hanyutan Genetik","Perubahan frekuensi alel secara acak akibat kebetulan, kuat pada <b>populasi kecil</b>.","Alel bisa hilang atau terfiksasi tanpa memandang keunggulannya. Contoh: efek pendiri dan efek leher botol.","Koloni pendiri di pulau kecil; cheetah dan gajah laut yang pernah nyaris punah."],
+["🔀 Rekombinasi Gen","Pertukaran dan penyusunan ulang alel saat meiosis (pindah silang, pemisahan bebas) dan fertilisasi.","Tidak mengubah frekuensi alel, tetapi menciptakan <b>kombinasi genotipe baru</b> sebagai bahan seleksi.","Anak dalam satu keluarga yang berbeda-beda meski orang tuanya sama."],
+["📐 Dasar: Frekuensi Alel","Frekuensi alel p + q = 1. Genotipe: p² (AA) + 2pq (Aa) + q² (aa) = 1.","Evolusi = perubahan frekuensi alel antargenerasi. Seleksi terhadap aa: p’ = p / (1 − s·q²).","Kelima faktor (mutasi, migrasi, hanyutan, rekombinasi, seleksi) menggeser keseimbangan Hardy–Weinberg."]];
+TH.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t[0];b.onclick=()=>sh(i);$("tl").append(b)});
+function sh(i){const t=TH[i];$("tc").innerHTML=`<h2 style="font-size:26px">${t[0]}</h2><p><span class="tag">Pengertian</span></p><p>${t[1]}</p><p><span class="tag">Pengaruh pada frekuensi alel</span></p><p>${t[2]}</p><p><span class="tag">Contoh</span></p><p>${t[3]}</p><p style="margin-top:14px;font-size:13px;color:#6a3d00">💡 Coba di tab <b>Simulasi</b> untuk melihat efeknya.</p>`}sh(0);
+/* prosedur */
+const PR=[["Persiapan","Buka tab <b>Teori</b>, baca kelima konsep.","Catat definisi p, q, dan rumus perubahan p.","Siapkan buku catatan dan LKPD."],
+["Kenali Panel","Buka tab <b>Simulasi</b>.","Panel kanan: N, p awal, µ, m, s.","Bulatan = individu; grafik = p tiap generasi."],
+["Kontrol (Baseline)","Atur N=100, p=0,5, µ=m=s=0, lalu klik <b>Auto</b>.","Amati p selama 50 generasi.","Catat: kecil naik-turun karena hanyutan."],
+["Uji Mutasi","Klik <b>Reset</b>, set µ=0,05.","Jalankan 30 generasi.","Catat arah p dan jelaskan alasannya."],
+["Uji Migrasi & Hanyutan","Migrasi: p=0,9, m=0,1 (migran p=0,2).","Hanyutan: N=10, tanpa faktor lain; ulang 3×.","Bandingkan hasil tiap percobaan."],
+["Uji Seleksi & Prediksi","Set s=0,5 lalu prediksi p sebelum menjalankan.","Jalankan dan cocokkan dengan prediksi.","Kerjakan <b>LKPD</b> (5 pilihan ganda + 2 uraian), lihat <b>Nilai</b>, unduh PDF."]];
+$("pg").innerHTML=PR.map((p,i)=>`<div class="cd"><h2><span class="num">${i+1}</span>${p[0]}</h2><ul>${p.slice(1).map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("");
+/* simulasi */
+let p,gen,hist,inds,tm,pm=.2;const V=id=>+$(id).value;
+const K={mut:[100,.5,.05,0,0,"Mutasi A→a menurunkan p perlahan secara konsisten; laju nyata di alam jauh lebih kecil, tetapi bekerja terus selama ribuan generasi."],mig:[100,.9,0,.1,0,"Seperti burung antar pulau di Maluku: aliran gen dari populasi sumber (p=0,2) menarik p turun ke 0,2."],dri:[10,.5,0,0,0,"Seperti populasi di pulau kecil terpencil: p berubah acak dan cepat terfiksasi (0 atau 1). Ulangi beberapa kali!"],sel:[200,.5,0,0,.5,"Lingkungan berubah dan alel a dirugikan: q turun, p naik mendekati 1. Bandingkan dengan prediksimu!"]};
+function lab(){$("vN").textContent=V("N");$("vp").textContent=V("p0").toFixed(2);$("vmu").textContent=V("mu");$("vm").textContent=V("m");$("vs").textContent=V("s")}
+function reset(){clearInterval(tm);tm=0;$("ba").textContent="⏩ Auto";lab();p=V("p0");gen=0;hist=[p];const N=V("N");inds=[];for(let i=0;i<N;i++){let c=0;for(let k=0;k<2;k++)if(Math.random()<p)c++;inds.push(c)}draw()}
+function step(){const N=V("N"),q=1-p;p=p/(1-V("s")*q*q);p*=1-V("mu");p=(1-V("m"))*p+V("m")*pm;p=Math.min(1,Math.max(0,p));let a=0;const al=[];for(let i=0;i<2*N;i++){const x=Math.random()<p?1:0;a+=x;al.push(x)}p=a/(2*N);inds=[];for(let i=0;i<N;i++)inds.push(al[2*i]+al[2*i+1]);gen++;hist.push(p);draw()}
+function draw(){$("rg").textContent=gen;$("rp").textContent=p.toFixed(2);$("rq").textContent=(1-p).toFixed(2);
+let c=$("c1").getContext("2d");c.clearRect(0,0,680,240);const N=inds.length,cols=Math.ceil(Math.sqrt(N*680/240)),r=Math.min(680/cols,240/Math.ceil(N/cols)),C=["#12b5d6","#9b4dff","#ff4fa3"];
+inds.forEach((v,i)=>{const x=(i%cols+.5)*(680/cols),y=(Math.floor(i/cols)+.5)*(240/Math.ceil(N/cols));const g=c.createRadialGradient(x-r*.12,y-r*.12,1,x,y,r*.4);g.addColorStop(0,"#fff");g.addColorStop(.35,C[v]);g.addColorStop(1,C[v]);c.fillStyle=g;c.beginPath();c.arc(x,y,r*.38,0,7);c.fill()});
+c=$("c2").getContext("2d");c.clearRect(0,0,680,230);c.strokeStyle="#ddd";c.fillStyle="#555";c.font="12px sans-serif";
+for(let i=0;i<=4;i++){const y=20+(190)*(1-i/4);c.beginPath();c.moveTo(40,y);c.lineTo(670,y);c.stroke();c.fillText((i/4).toFixed(2),4,y+4)}
+const M=Math.max(50,gen);c.fillText("Generasi → "+M,590,226);c.lineWidth=3;c.strokeStyle="#f107a3";c.beginPath();hist.forEach((v,i)=>{const x=40+630*i/M,y=20+190*(1-v);i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();c.fillStyle="#7b2ff7";c.font="bold 13px sans-serif";c.fillText("Frekuensi alel A (p)",48,14)}
+["N","p0","mu","m","s"].forEach(i=>$(i).oninput=()=>{(i=="N"||i=="p0")?reset():lab()});
+$("b1").onclick=step;$("br").onclick=()=>{reset();$("kn").textContent=""};
+$("ba").onclick=()=>{if(tm){clearInterval(tm);tm=0;$("ba").textContent="⏩ Auto"}else{$("ba").textContent="⏸ Jeda";tm=setInterval(step,250)}};
+document.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{const k=K[b.dataset.k];["N","p0","mu","m","s"].forEach((id,i)=>$(id).value=k[i]);reset();$("kn").textContent="ℹ️ "+k[5]+" Klik Auto."});
+reset();
+/* LKPD */
+const Q=[
+{q:"Sekelompok 12 burung pendiri menetap di pulau kecil. Frekuensi alel bulu putih menjadi 0,9, padahal di populasi asal hanya 0,2. Mekanisme paling tepat?",o:["Mutasi terarah","Efek pendiri (hanyutan genetik)","Rekombinasi","Seleksi buatan"],a:1,f:"Sampel kecil pendiri tidak mewakili populasi asal, sehingga frekuensi alel bergeser acak (hanyutan)."},
+{q:"Pada simulasi tanpa seleksi, p awal 0,5. Hasil paling mungkin pada N=10 dibanding N=200?",o:["N=10 stabil, N=200 berubah acak","Keduanya identik","N=10 berfluktuasi besar dan cepat terfiksasi","N=200 pasti terfiksasi"],a:2,f:"Hanyutan genetik berbanding terbalik dengan ukuran populasi; populasi kecil berfluktuasi kuat."},
+{q:"Populasi p=0,9 menerima migran (p=0,2) dengan m=0,1 per generasi. Prediksi arah p?",o:["Naik ke 1","Tetap 0,9","Turun mendekati 0,2","Acak tanpa arah"],a:2,f:"Migrasi menggeser p ke arah p migran dan menyeragamkan populasi dengan populasi sumber."},
+{q:"Mutasi A→a (µ=0,05) berlangsung bersama seleksi kuat terhadap aa (s=0,5). Prediksi paling tepat?",o:["a hilang total","p tidak pernah 1: tercapai keseimbangan mutasi–seleksi","p turun terus ke 0","Tidak ada perubahan"],a:1,f:"Mutasi terus memasok alel a, seleksi menyingkirkannya; keduanya menyeimbangkan sehingga a bertahan pada frekuensi rendah."},
+{q:"Mengapa rekombinasi gen dianggap penting bagi evolusi meski tidak mengubah frekuensi alel?",o:["Ia membuat alel baru","Ia menghapus alel merugikan","Ia menyusun kombinasi genotipe baru sebagai bahan seleksi","Ia menggantikan mutasi"],a:2,f:"Rekombinasi memperbanyak variasi genotipe dari alel yang sudah ada, tanpa mengubah jumlah alel."},
+{u:1,q:"Uraian 1: Sebuah pulau kecil di Maluku Tengah terisolasi (tanpa migrasi), lalu bencana membuat populasi burung menyusut menjadi N=10. Jelaskan bagaimana frekuensi alel berubah dan apa dampaknya bagi keanekaragaman genetik.",k:["acak","hilang","fiksasi","terfiksasi","variasi","keanekaragaman","menurun"],f:"Hanyutan genetik (efek leher botol) membuat frekuensi alel berubah acak; alel langka bisa hilang dan alel lain terfiksasi, sehingga keanekaragaman genetik menurun dan populasi lebih rentan."},
+{u:1,q:"Uraian 2: Tanah di suatu habitat berubah sehingga individu aa dirugikan (s=0,5) pada populasi dengan p=0,3. Prediksikan arah perubahan p, lalu jelaskan bagaimana mutasi A→a dan migrasi dapat memengaruhi hasilnya.",k:["meningkat","naik","seleksi","mutasi","migrasi"],f:"p (alel A) meningkat karena aa berfitness rendah dan tersingkir. Mutasi A→a terus memasok alel a sehingga p tidak mencapai 1, dan migrasi dari populasi ber-p lebih rendah memperlambat kenaikan p."}];
+let qi=0,ans=Array(7).fill(null);
+function ru(){const x=Q[qi],d=ans[qi];$("qn").textContent=`Soal ${qi+1} dari ${Q.length} (Uraian)`;$("qq").textContent=x.q;$("qo").innerHTML=`<textarea id="ta" rows="5" style="width:100%;border:3px solid #c9b8ff;border-radius:12px;padding:10px;font-size:14px" ${d?"disabled":""} placeholder="Tulis jawabanmu di sini..."></textarea>`+(d?"":`<button class="g" id="uc" style="margin-top:8px">✔ Periksa Jawaban</button>`);
+if(d)$("ta").value=d.t;$("qf").innerHTML=d?`<div class="fb">${d.p==20?"✅ Sangat baik! ":d.p?"🟡 Cukup, lengkapi lagi. ":"❌ Belum tepat. "}<b>Kunci:</b> ${x.f}</div>`:"";
+if(!d)$("uc").onclick=()=>{const t=$("ta").value.toLowerCase(),n=x.k.filter(k=>t.includes(k)).length;ans[qi]={t:$("ta").value,p:n>=2?20:n==1?10:0};tone(n?1047:220,.3,.1);ru()}}
+function rq(){if(Q[qi].u)return ru();const x=Q[qi];$("qn").textContent=`Soal ${qi+1} dari ${Q.length}`;$("qq").textContent=x.q;$("qo").innerHTML=x.o.map((t,i)=>`<button class="op ${ans[qi]!=null?(i==x.a?"ok":i==ans[qi]?"no":""):""}" data-i="${i}">${"ABCD"[i]}. ${t}</button>`).join("");
+$("qf").innerHTML=ans[qi]!=null?`<div class="fb">${ans[qi]==x.a?"✅ Tepat! ":"❌ Belum tepat. "}${x.f}</div>`:"";
+document.querySelectorAll(".op").forEach(b=>b.onclick=()=>{if(ans[qi]==null){ans[qi]=+b.dataset.i;tone(ans[qi]==x.a?1047:220,.3,.1);rq()}})}
+$("qp").onclick=()=>{qi=Math.max(0,qi-1);rq()};$("qx").onclick=()=>{qi=Math.min(Q.length-1,qi+1);rq()};$("qs").onclick=()=>go(4);rq();
+function nilai(){const s=Q.reduce((t,x,i)=>t+(x.u?(ans[i]?ans[i].p:0):(ans[i]==x.a?12:0)),0),bs=s>=80?["🏆","Lencana Emas: Ilmuwan Evolusi"]:s>=60?["🥈","Lencana Perak: Penjelajah Gen"]:s>=40?["🥉","Lencana Perunggu: Peneliti Muda"]:["🥚","Lencana Telur: Ayo coba lagi!"];
+$("sc").textContent=s;$("bd").textContent=bs[0];$("bn").textContent=bs[1];$("pnm").textContent=$("nm").value?"Nama: "+$("nm").value:"";
+$("fl").innerHTML=Q.map((x,i)=>`<div>${ans[i]==null?"⚪":x.u?(ans[i].p==20?"✅":ans[i].p?"🟡":"❌"):ans[i]==x.a?"✅":"❌"} <b>Soal ${i+1}:</b> ${ans[i]==null?"Belum dijawab. ":""}${x.f}</div>`).join("");if(s>=60)tone(1319,.5,.1)}
+$("nm").oninput=()=>$("pnm").textContent=$("nm").value?"Nama: "+$("nm").value:"";
+$("dl").onclick=()=>{nilai();window.print()};$("rs").onclick=()=>{ans.fill(null);qi=0;rq();nilai()};
+$("pf").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$("ph").style.backgroundImage=`url(${r.result})`;$("ph").textContent=""};r.readAsDataURL(f)};
+</script></body></html>
